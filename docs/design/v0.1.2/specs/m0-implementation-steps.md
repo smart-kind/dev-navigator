@@ -1,7 +1,7 @@
 # M0 实施步骤（单机闭环）
 
 > 版本目录：v0.1.2 · 配套 `../prd.md` §11 · 日期：2026-09-09
-> 本文档把 M0 拆到"照着就能做"的粒度。**技术选型是默认假设，开工前需拍板（主干 §14-11）。**
+> 本文档把 M0 拆到"照着就能做"的粒度。**技术选型已拍板（见 §1）。**
 
 ---
 
@@ -20,18 +20,23 @@
 
 ---
 
-## 1. 技术选型（默认假设，开工前拍板）
+## 1. 技术选型（已拍板）
 
-| 项 | 默认假设 | 备选 |
+**形态**：两容器分离——`navigator-core`（独立常驻 Node 服务，一切权威所在：HTTP API / WS hub / MCP server / agent 拉起 / 后台任务 / SQLite）+ `navigator-web`（Next.js：登录/用户体系/控制面板，调 core API + 连 WS）。全栈 Node/JS，**不引 Python**。
+
+| 项 | 决定 | 备注 |
 |---|---|---|
-| 语言/运行时 | **Node.js + TypeScript**（与 cumora/schedule-task 生态一致） | Python |
-| 仓库结构 | monorepo：`server/`（Navigator）`worker/`（daemon）`shared/`（类型与协议） | 单包 |
-| 状态库 | SQLite（better-sqlite3），Navigator 单写者 | Postgres |
-| HTTP/WS | Fastify（HTTP）+ `ws`（WebSocket server/client） | Express |
-| Web UI | 极简：静态页 + fetch（先不做框架，M1 再定） | React/Vue |
-| 登录 | 用户名/密码 + bcrypt + 会话 token | — |
-| ACP 驱动 | 子进程 stdio → JSON-RPC 桥接（见 §5 spike） | — |
-| 合并 | v1 Navigator 本体确定性合并（`git merge`），假设无冲突 | 冲突留给 M1 大脑 |
+| 语言/运行时 | **Node.js + TypeScript** | 全栈同一语言 |
+| 服务形态 | **两容器**：core 独立服务；web = Next.js | core 的活（WS/MCP/拉起/后台/权限权威）**绝不搬进 Next**，Next 只是 core 的客户端 |
+| 仓库结构 | monorepo：`core/` `web/`(Next.js) `worker/`(daemon) `shared/`(类型与协议) | worker 与 core 同机可先跑，结构上独立 |
+| 状态库 | SQLite（better-sqlite3），Navigator 单写者 | 经 Drizzle 抽象，可切 Postgres |
+| DB 抽象层 | **Drizzle**（TS 定义 schema，驱动可换） | 切换 = 换 driver + 重跑 migration |
+| HTTP/WS | core：Fastify（HTTP）+ `ws`（WebSocket server/client） | — |
+| Web 框架 | **Next.js** | 团队访问/用户体系/项目权限的前端容器（选它：使用者最熟 + 权限/中间件组织友好） |
+| 登录 | 用户名/密码 + bcrypt + 会话 | 权威在 core；web 侧会话 cookie / BFF 代理方式待细化 |
+| ACP 驱动 | 子进程 stdio → JSON-RPC 桥接（见 S1 spike） | — |
+| 合并 | v1 core 本体确定性合并（`git merge`），假设无冲突 | 冲突留给 M1 大脑 |
+| Electron | 以后的可选壳（包同一套 web 产物），不影响本架构 | M0 不做 |
 
 ---
 
@@ -46,7 +51,7 @@
 
 ### S2 · 脚手架 + 数据模型
 
-- monorepo 初始化（TS、lint、`shared/` 类型包）。
+- monorepo 初始化（TS、lint；包：`core/` `web/` `worker/` `shared/`）。
 - SQLite schema（字段以主干 §13 为准，M0 只建用得到的表）：
 
 ```
@@ -103,11 +108,12 @@ sparks(id,project_id,text,source,status,created_at)   -- 仅验收落卡用，�
 - **不通过**：自动落一张 Spark（`source=acceptance, text=note`）→ goal 置 `cancelled`（N3 默认，见 goal-story-card spec §5）。
 - **验证**：通过→main 有新提交；不通过→Spark 有记录、main 无该分支改动。
 
-### S9 · 极简 Web 界面
+### S9 · Web 端（Next.js，独立容器/独立调试）
 
-- 登录页；项目列表；目标页（故事卡三要素 + 验收标准 + 边界 + 任务清单 + 每任务 evidence）；验收按钮。
+- `web/` Next.js 脚手架；本地 dev server + 代理到 core API（CORS/dev proxy）。
+- 登录页（调 core 登录 → 会话）；项目列表；目标页（故事卡三要素 + 验收标准 + 边界 + 任务清单 + 每任务 evidence）；验收按钮。
 - 样式不追求——**可见性第一**（参考 loopx dashboard 的信息组织，不做它的 UI）。
-- **验证**：浏览器全程走完 M0 链路。
+- **验证**：浏览器全程走完 M0 链路；core 与 web 各自独立起、独立停（验证隔离成立）。
 
 ### S10 · 端到端验收 + 文档收尾
 
@@ -131,4 +137,4 @@ sparks(id,project_id,text,source,status,created_at)   -- 仅验收落卡用，�
 
 - S1–S10 全部验证通过；
 - 工作区代码路径与远程设计一致（无单机特例）；
-- 主干 §14 待决策中与 M0 相关的项（11 技术选型、1 合并执行者）已拍板或记录临时默认。
+- 主干 §14 待决策中与 M0 相关的项：11 技术选型已拍板（见 §1）；1 合并执行者临时默认 = core 本体确定性合并。

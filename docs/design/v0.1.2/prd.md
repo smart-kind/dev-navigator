@@ -339,7 +339,7 @@ M0 验收：手动跑通"建项目 → 定故事卡目标 → 拆任务 → 派�
 8. **澄清落地细节**：澄清后是否生成精炼卡并链回原文；聊天现场保留。
 9. **登录细节**：用户名/密码存储与会话（设计期定）。
 10. **架构数据维护方式**：人手 vs 大脑辅助编辑（M1+ 细化）。
-11. **M0 技术选型**：语言/框架（Node/TS vs Python vs 混合）——`specs/m0-implementation-steps.md` 会给默认假设，实现前拍板。
+11. ~~M0 技术选型~~ **已拍板**：Node/TS + Drizzle/SQLite + 两容器（`navigator-core` 独立服务 + `navigator-web` Next.js），详见 `specs/m0-implementation-steps.md` §1。
 12. **簇 → 故事卡的粒度**：一个簇提炼成一张故事卡，还是可拆多张（见 goal-story-card spec）。
 
 ---
