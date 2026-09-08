@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <style>
+      .st { fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.5; rx:10 }
+      .sb { fill:#fff; stroke:#0969da; stroke-width:1.5; rx:8 }
+      .tt { font-size:13px; fill:#1f2328; text-anchor:middle }
+      .ts { font-size:11px; fill:#57606a; text-anchor:middle }
+    </style>
+  </defs>
+  <rect class="st" x="20" y="15" width="1060" height="390"/>
+
+  <!-- 人 -->
+  <rect class="sb" x="60" y="60" width="200" height="90" rx="8"/>
+  <text class="tt" x="160" y="90">👤 人（Owner）</text>
+  <text class="ts" x="160" y="110">定契约 · 选等级</text>
+  <text class="ts" x="160" y="128">随时 Takeover</text>
+  <text class="ts" x="160" y="146">处理 Escalate</text>
+
+  <!-- 代理 -->
+  <rect class="sb" x="450" y="60" width="200" height="90" rx="8"/>
+  <text class="tt" x="550" y="90">🤖 代理 Agent（Surrogate）</text>
+  <text class="ts" x="550" y="110">认领 · 推进 · 代行低风险判断</text>
+  <text class="ts" x="550" y="128">写 evidence · 汇报</text>
+  <text class="ts" x="550" y="146">受契约约束</text>
+
+  <!-- 契约 -->
+  <rect class="sb" x="840" y="60" width="200" height="90" rx="8"/>
+  <text class="tt" x="940" y="90">📜 Goal Contract</text>
+  <text class="ts" x="940" y="110">completion / boundaries</text>
+  <text class="ts" x="940" y="128">checkpoints / autonomy</text>
+  <text class="ts" x="940" y="146">exit</text>
+
+  <!-- 委托线 -->
+  <line x1="260" y1="105" x2="450" y2="105" stroke="#0969da" stroke-width="2" marker-end="url(#a3)"/>
+  <text class="ts" x="355" y="95" fill="#0969da">delegate（L0/L1）</text>
+  <line x1="450" y1="135" x2="260" y2="135" stroke="#1a7f37" stroke-width="2" marker-end="url(#a3)"/>
+  <text class="ts" x="355" y="155" fill="#1a7f37">takeover（随时）</text>
+  <line x1="650" y1="90" x2="840" y2="90" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a3)"/>
+  <line x1="940" y1="150" x2="940" y2="210" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a3)"/>
+  <text class="ts" x="990" y="175" fill="#888">约束</text>
+
+  <!-- 底部执行流 -->
+  <rect class="sb" x="60" y="220" width="960" height="150" rx="8"/>
+  <text class="tt" x="540" y="245">日常执行循环（由 autonomy 决定谁在环）</text>
+  <text class="ts" x="540" y="265">claim todo → 执行 → 验证（evidence）→ complete → refresh-state</text>
+
+  <!-- 分流 -->
+  <text class="tt" x="180" y="305">L0/L1</text>
+  <text class="ts" x="180" y="322">代理独立推进</text>
+  <text class="ts" x="180" y="340">检查点内自决</text>
+  <text class="tt" x="460" y="305">L2</text>
+  <text class="ts" x="460" y="322">每个 checkpoint 停</text>
+  <text class="ts" x="460" y="340">给人确认</text>
+  <text class="tt" x="740" y="305">契约外 / 高风险</text>
+  <text class="ts" x="740" y="322">→ Escalate 给人</text>
+  <text class="ts" x="740" y="340">（NOTIFY，不猜）</text>
+</svg>

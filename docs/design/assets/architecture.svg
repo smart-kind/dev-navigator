@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <style>
+      .layer { fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.5; rx:10 }
+      .box   { fill:#ffffff; stroke:#0969da; stroke-width:1.5; rx:6 }
+      .boxg  { fill:#ffffff; stroke:#1a7f37; stroke-width:1.5; rx:6 }
+      .boxy  { fill:#ffffff; stroke:#9a6700; stroke-width:1.5; rx:6 }
+      .boxr  { fill:#ffffff; stroke:#cf222e; stroke-width:1.5; rx:6 }
+      .t     { font-size:14px; fill:#1f2328; text-anchor:middle }
+      .ts    { font-size:11.5px; fill:#57606a; text-anchor:middle }
+      .th    { font-size:15px; font-weight:bold; fill:#1f2328; text-anchor:middle }
+      .lbl   { font-size:12px; fill:#0969da; text-anchor:middle; font-weight:bold }
+    </style>
+  </defs>
+
+  <!-- ===== 层 1：交互层 ===== -->
+  <rect class="layer" x="20" y="15" width="1160" height="130"/>
+  <text class="th" x="600" y="42">① 交互层（DevConsole UI）</text>
+  <rect class="box" x="60" y="58" width="240" height="70" rx="8"/>
+  <text class="t" x="180" y="86">Wizard（目标向导）</text>
+  <text class="ts" x="180" y="106">目标→契约→复看点→介入等级</text>
+  <rect class="box" x="480" y="58" width="240" height="70" rx="8"/>
+  <text class="t" x="600" y="86">Dashboard（状态面板）</text>
+  <text class="ts" x="600" y="106">目标/todo/gate/worker 活性</text>
+  <rect class="box" x="900" y="58" width="240" height="70" rx="8"/>
+  <text class="t" x="1020" y="86">Takeover 控制台</text>
+  <text class="ts" x="1020" y="106">夺回介入 / Escalate 收件箱</text>
+
+  <!-- 层间箭头 -->
+  <line x1="600" y1="145" x2="600" y2="175" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===== 层 2：契约层 ===== -->
+  <rect class="layer" x="20" y="175" width="1160" height="120"/>
+  <text class="th" x="600" y="202">② 目标契约层（DevConsole 核心增量）</text>
+  <rect class="boxr" x="340" y="215" width="520" height="64" rx="8"/>
+  <text class="t" x="600" y="240">Goal Contract</text>
+  <text class="ts" x="600" y="260">completion · boundaries · checkpoints · autonomy · exit</text>
+
+  <line x1="600" y1="295" x2="600" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===== 层 3：状态 + 调度层 ===== -->
+  <rect class="layer" x="20" y="325" width="1160" height="190"/>
+  <text class="th" x="600" y="352">③ 状态 + 确定性调度层</text>
+
+  <rect class="box" x="60" y="368" width="300" height="130" rx="8"/>
+  <text class="t" x="210" y="394">loopx（目标状态机）</text>
+  <text class="ts" x="210" y="414">goal registry · todo · quota</text>
+  <text class="ts" x="210" y="432">gate · evidence · refresh-state</text>
+  <text class="ts" x="210" y="452">（单机多 agent 共用 registry）</text>
+  <text class="ts" x="210" y="472">source of truth：目标与进度</text>
+
+  <rect class="boxg" x="450" y="368" width="300" height="130" rx="8"/>
+  <text class="t" x="600" y="394">schedule-task（确定性调度器）</text>
+  <text class="ts" x="600" y="414">watchdog · git 总线（push intent</text>
+  <text class="ts" x="600" y="432">/ merge result）· 机器身份</text>
+  <text class="ts" x="600" y="452">resume 会话 · 限频窗口恢复</text>
+  <text class="ts" x="600" y="472">无 AI 进控制环</text>
+
+  <rect class="boxy" x="840" y="368" width="300" height="130" rx="8"/>
+  <text class="t" x="990" y="394">Worker Registry（cumora 借鉴）</text>
+  <text class="ts" x="990" y="414">Computer：host × engine</text>
+  <text class="ts" x="990" y="432">配对 token · device token</text>
+  <text class="ts" x="990" y="452">30s heartbeat · online/offline/busy</text>
+  <text class="ts" x="990" y="472">空闲检测 · 可撤销凭证</text>
+
+  <!-- 层内连接 -->
+  <line x1="360" y1="433" x2="450" y2="433" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="750" y1="433" x2="840" y2="433" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text class="lbl" x="405" y="425">状态查询</text>
+  <text class="lbl" x="795" y="425">派活</text>
+
+  <line x1="600" y1="515" x2="600" y2="545" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===== 层 4：执行层 ===== -->
+  <rect class="layer" x="20" y="545" width="1160" height="200"/>
+  <text class="th" x="600" y="572">④ 执行层（Worker 池）</text>
+
+  <!-- 本机 -->
+  <rect class="box" x="60" y="590" width="330" height="140" rx="8"/>
+  <text class="t" x="225" y="616">本机 Mac</text>
+  <text class="ts" x="225" y="638">CC · Kimi Code · OpenCode · Codex</text>
+  <text class="ts" x="225" y="658">共用一份 loopx registry</text>
+  <text class="ts" x="225" y="680">agent 命令行轮询认领 todo</text>
+  <text class="ts" x="225" y="700">（local-loopx 通道）</text>
+
+  <!-- 远程机群 -->
+  <rect class="box" x="440" y="590" width="320" height="140" rx="8"/>
+  <text class="t" x="600" y="616">机器 B / C / D / E…（远程）</text>
+  <text class="ts" x="600" y="638">cumora daemon（--install-service）</text>
+  <text class="ts" x="600" y="658">engine：claude / codex / kimi…</text>
+  <text class="ts" x="600" y="680">配对 + 心跳 + 可撤销凭证</text>
+  <text class="ts" x="600" y="700">（remote 通道）</text>
+
+  <!-- 定时 -->
+  <rect class="boxg" x="810" y="590" width="330" height="140" rx="8"/>
+  <text class="t" x="975" y="616">无人值守 worker（VPS…）</text>
+  <text class="ts" x="975" y="638">schedule-task executor</text>
+  <text class="ts" x="975" y="658">claude / kimi executor CLI</text>
+  <text class="ts" x="975" y="680">到点执行 · 限频自愈</text>
+  <text class="ts" x="975" y="700">（scheduled 通道）</text>
+
+  <line x1="225" y1="590" x2="225" y2="560" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="600" y1="590" x2="600" y2="560" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="975" y1="590" x2="975" y2="560" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+</svg>
