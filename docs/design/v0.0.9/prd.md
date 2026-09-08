@@ -1,6 +1,6 @@
-# 开发控制台（DevConsole）PRD
+# 开发控制台（DevConsole）PRD（存档）
 
-> 版本：v0.1（草稿） · 日期：2026-09-08 · 状态：待评审
+> 日期：2026-09-08 · 状态：待评审（存档快照，已被 Navigator PRD 取代）
 > 作者：david + agent（Kimi Code）
 > 定位：一份**可执行**的产品需求文档——整合 dev-loop / loopx / schedule-task / cumora BYOA 四套经验，产出一个带 **dashboard + wizard + 可控多机执行**的开发控制台。
 

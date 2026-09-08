@@ -1,6 +1,6 @@
-# Navigator PRD v0.1.1（草稿）
+# Navigator PRD（草稿）
 
-> 版本：v0.1.1（草稿） · 日期：2026-09-09 · 状态：待评审
+> 日期：2026-09-09 · 状态：待评审（存档快照，v0.1.1）
 > 作者：david + agent（Kimi Code）
 > 定位：一份**可执行**的产品需求文档——意见（Spark）驱动的产品迭代系统。
 > 命名：中枢代号 **Navigator**（暂定）。取代 `prd-v0.1.0.md` 与旧 `PRD.md`（DevConsole 草案）。
