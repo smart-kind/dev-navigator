@@ -16,6 +16,7 @@ docs/design/
 ├── v0.1.1/              （存档）Spark 术语引入、分层验收模型（任务自验 → 目标验收 → 合并）、实体与关系
 │   └── prd.md
 └── v0.1.2/              ★ 当前活版本
+    ├── prd-v0.1.2.md     单文件全量版：主干 + 用户故事 + specs 合并（供整体评审/移交）
     ├── prd.md           主干：定位 / 术语 / 实体与关系 / 架构 / 里程碑 / 待决策（详细设计见 specs）
     ├── user-story.md    用户故事（人话验证设计）
     └── specs/           详细设计，按主题各一份
@@ -23,6 +24,8 @@ docs/design/
         ├── goal-story-card-design.md
         └── m0-implementation-steps.md
 ```
+
+> **双形态同步维护**：`v0.1.2/` 内同时维护「模块版」（`prd.md` + `user-story.md` + `specs/`）与「单文件全量版」`prd-v0.1.2.md`——模块版有改动时，同步更新全量版（文件名即版本号）。
 
 ## 当前活版本：v0.1.2
 
